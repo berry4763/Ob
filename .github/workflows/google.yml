@@ -1,0 +1,98 @@
+export default function HotelManagementSystem() { const rooms = [ { id: 101, type: 'Single', status: 'Available', price: '$50' }, { id: 102, type: 'Double', status: 'Booked', price: '$80' }, { id: 103, type: 'Deluxe', status: 'Available', price: '$120' }, { id: 104, type: 'Suite', status: 'Maintenance', price: '$200' }, ];
+
+const bookings = [ { guest: 'John Banda', room: 102, checkIn: '2026-05-15', checkOut: '2026-05-18', }, ];
+
+return ( <div className="min-h-screen bg-gray-100 p-6"> <div className="max-w-7xl mx-auto"> <h1 className="text-4xl font-bold text-center text-blue-700 mb-8"> Hotel Management System </h1>
+
+<div className="grid md:grid-cols-3 gap-6 mb-8">
+      <div className="bg-white rounded-2xl shadow-lg p-6">
+        <h2 className="text-2xl font-semibold mb-4">Total Rooms</h2>
+        <p className="text-5xl font-bold text-blue-600">{rooms.length}</p>
+      </div>
+
+      <div className="bg-white rounded-2xl shadow-lg p-6">
+        <h2 className="text-2xl font-semibold mb-4">Available Rooms</h2>
+        <p className="text-5xl font-bold text-green-600">
+          {rooms.filter((room) => room.status === 'Available').length}
+        </p>
+      </div>
+
+      <div className="bg-white rounded-2xl shadow-lg p-6">
+        <h2 className="text-2xl font-semibold mb-4">Booked Rooms</h2>
+        <p className="text-5xl font-bold text-red-600">
+          {rooms.filter((room) => room.status === 'Booked').length}
+        </p>
+      </div>
+    </div>
+
+    <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+      <h2 className="text-3xl font-semibold mb-6 text-blue-700">
+        Room Information
+      </h2>
+
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-blue-600 text-white">
+              <th className="p-3 text-left">Room No</th>
+              <th className="p-3 text-left">Type</th>
+              <th className="p-3 text-left">Status</th>
+              <th className="p-3 text-left">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rooms.map((room) => (
+              <tr key={room.id} className="border-b hover:bg-gray-100">
+                <td className="p-3">{room.id}</td>
+                <td className="p-3">{room.type}</td>
+                <td
+                  className={`p-3 font-semibold ${
+                    room.status === 'Available'
+                      ? 'text-green-600'
+                      : room.status === 'Booked'
+                      ? 'text-red-600'
+                      : 'text-yellow-600'
+                  }`}
+                >
+                  {room.status}
+                </td>
+                <td className="p-3">{room.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div className="bg-white rounded-2xl shadow-lg p-6">
+      <h2 className="text-3xl font-semibold mb-6 text-blue-700">
+        Booking Records
+      </h2>
+
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-green-600 text-white">
+              <th className="p-3 text-left">Guest Name</th>
+              <th className="p-3 text-left">Room</th>
+              <th className="p-3 text-left">Check-In</th>
+              <th className="p-3 text-left">Check-Out</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map((booking, index) => (
+              <tr key={index} className="border-b hover:bg-gray-100">
+                <td className="p-3">{booking.guest}</td>
+                <td className="p-3">{booking.room}</td>
+                <td className="p-3">{booking.checkIn}</td>
+                <td className="p-3">{booking.checkOut}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+); }
